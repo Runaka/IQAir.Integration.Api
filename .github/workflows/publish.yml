@@ -27,7 +27,7 @@ jobs:
         run: dotnet build --configuration Release -p:PackageVersion=1.0.${{ github.run_number }} --output ./nupkg
 
       - name: Run Unit Tests
-        run: dotnet test src/IQAir.Integration.Api.UnitTests/IQAir.Integration.Api.UnitTests.csproj --configuration Release --no-build --verbosity normal
+        run: dotnet test IQAir.Integration.Api.UnitTests/IQAir.Integration.Api.UnitTests.csproj --configuration Release --no-build --verbosity normal
       
       - name: Pack
         run: dotnet pack --configuration Release --no-build --output ./nupkg
