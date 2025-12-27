@@ -2,6 +2,12 @@
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
+        <PackageId>IQAir.Integration.Api</PackageId>
+        <Version>1.0.0</Version>
+        <Authors>Runaka</Authors>
+        <Description>Wrapper for the IQAir</Description>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <RepositoryUrl>https://github.com/Runaka/IQAir.Integration.Api</RepositoryUrl>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
