@@ -1,0 +1,33 @@
+name: Publish to NuGet
+
+on:
+  push:
+    branches: [ main ] # Triggers on every push to main
+  # Alternatively, trigger only on tagged releases:
+  # release:
+  #   types: [published]
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x' # Adjust to your version
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --configuration Release -p:PackageVersion=1.0.${{ github.run_number }} --output ./nupkg
+
+      - name: Run Unit Tests
+        run: dotnet test src/IQAir.Integration.Api.UnitTests/IQAir.Integration.Api.UnitTests.csproj --configuration Release --no-build --verbosity normal
+      
+      - name: Pack
+        run: dotnet pack --configuration Release --no-build --output ./nupkg
+
+      - name: Push to NuGet
+        run: dotnet nuget push ./nupkg/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
