@@ -1,6 +1,5 @@
 using IQAir.Integration.Api.Extensions;
 using IQAir.Integration.Api.IntegrationTests.Configs;
-using IQAir.Integration.Api.Models.Requests.V2.Community;
 using IQAir.Integration.Api.Models.Requests.V2.Startup;
 using IQAir.Integration.Api.Services.V2;
 using Microsoft.Extensions.Configuration;
