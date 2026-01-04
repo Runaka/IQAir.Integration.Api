@@ -4,6 +4,7 @@ using IQAir.Integration.Api.Services.IQAirHttpClient;
 using IQAir.Integration.Api.Services.V2;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Http.Resilience;
 using Polly;
 
@@ -14,9 +15,9 @@ public static class IQAirOpenApiIntegrationExtension
     public static IServiceCollection AddIQAirOpenApiIntegration(this IServiceCollection services,
         IConfiguration configuration)
     {
-        services.Configure<IQAirV2Options>(configuration.GetSection(nameof(IQAirV2Options)));
-        var iqAirV2Options = new IQAirV2Options();
-        configuration.GetSection(nameof(IQAirV2Options)).Bind(iqAirV2Options);
+        var section = configuration.GetSection(nameof(IQAirV2Options));
+        services.AddOptions<IQAirV2Options>().Bind(section);
+        var iqAirV2Options = section.Get<IQAirV2Options>();
         services.AddHttpClient(iqAirV2Options.HttpClientName, client =>
             {
                 client.BaseAddress = new Uri(iqAirV2Options.BaseUrl!);
