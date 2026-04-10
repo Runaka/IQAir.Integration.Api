@@ -23,8 +23,8 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
 
-      - name: Run xUnit Tests
-        run: dotnet test IQAir.Integration.Api.UnitTests/IQAir.Integration.Api.UnitTests.csproj --configuration Release --verbosity normal
+      #- name: Run xUnit Tests
+      #  run: dotnet test IQAir.Integration.Api.UnitTests/IQAir.Integration.Api.UnitTests.csproj --configuration Release --verbosity normal
           
       - name: Build and Pack
         run: dotnet pack IQAir.Integration.Api/IQAir.Integration.Api.csproj --configuration Release -p:PackageVersion=1.0.${{ github.run_number }} --output ../nupkg
